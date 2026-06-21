@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-beige-light: #FAF7F2;
+  --color-beige-mid: #F0EBE0;
+  --color-beige-dark: #E0D9CC;
+  --color-charcoal: #141414;
+  --color-charcoal-mid: #2A2A2A;
+  --color-gray-muted: #8C8C8C;
+  --color-gold: #C4A35A;
+  --color-gold-light: #D4B870;
+
+  /* Typography */
+  --font-display: var(--font-cormorant), serif;
+  --font-body: var(--font-dm-sans), sans-serif;
+
+  /* Transitions — Cinematic Precision */
+  --transition-premium: color, background-color, border-color, opacity, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 0.6s;
+  --duration-mid: 0.75s;
+  --transition-bg: background-color var(--duration-fast) var(--ease-cinematic);
+}
+
+:root {
+  --background: #FAF7F2;
+  --foreground: #141414;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hero carousel — slow zoom on each slide (Ken Burns) */
+@keyframes kenBurns {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1.0); }
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Cursor default hides for pointer devices */
+@media (pointer: fine) {
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+/* Smooth Scrolling */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* TipTap editor — mirrors the public article body look */
+.tiptap-editor p {
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 16px;
+  line-height: 1.85;
+  color: #2A2A2A;
+  margin-bottom: 1rem;
+}
+
+.tiptap-editor h2 {
+  font-family: var(--font-cormorant), serif;
+  font-size: 30px;
+  font-weight: 300;
+  color: #141414;
+  margin: 1.5rem 0 0.75rem;
+  line-height: 1.2;
+}
+
+.tiptap-editor h3 {
+  font-family: var(--font-cormorant), serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: #141414;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.tiptap-editor blockquote {
+  border-left: 2px solid #C4A35A;
+  padding-left: 1rem;
+  font-style: italic;
+  font-family: var(--font-cormorant), serif;
+  font-size: 20px;
+  color: #141414;
+  margin: 1.5rem 0;
+}
+
+.tiptap-editor ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tiptap-editor ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tiptap-editor li {
+  margin-bottom: 0.25rem;
+}
+
+.tiptap-editor img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+}
+
+.tiptap-editor hr {
+  border: none;
+  border-top: 1px solid #C4A35A;
+  margin: 1.5rem 0;
+}
+
+/* Published article body — mirrors the editor preview */
+.article-body p {
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 16px;
+  line-height: 1.85;
+  color: #2A2A2A;
+  margin-bottom: 1.5rem;
+}
+
+.article-body h2 {
+  font-family: var(--font-cormorant), serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: #141414;
+  line-height: 1.2;
+  margin: 3rem 0 1rem;
+}
+
+.article-body h3 {
+  font-family: var(--font-cormorant), serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: #141414;
+  margin: 2.5rem 0 1rem;
+}
+
+.article-body blockquote {
+  border-left: 2px solid #C4A35A;
+  padding-left: 1.5rem;
+  font-style: italic;
+  font-family: var(--font-cormorant), serif;
+  font-size: 22px;
+  color: #141414;
+  margin: 2rem 0;
+}
+
+.article-body ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.article-body ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.article-body li {
+  margin-bottom: 0.5rem;
+}
+
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  margin: 2.5rem 0;
+}
+
+.article-body hr {
+  border: none;
+  border-top: 1px solid #C4A35A;
+  margin: 2.5rem 0;
+}
