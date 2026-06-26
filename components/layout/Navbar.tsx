@@ -8,6 +8,7 @@ import { Menu, X } from 'lucide-react';
 import { useNavbarVisibility } from './NavbarContext';
 
 const navLinks = [
+  { name: 'About', href: '/about' },
   { name: 'Trainers', href: '/trainers' },
   { name: 'Membership', href: '/membership' },
   { name: 'Café', href: '/cafe' },
@@ -40,6 +41,7 @@ export default function Navbar() {
   // /transformations excluded: its page wrapper is bg-white, charcoal section is below.
   const isDarkHeroPage =
     pathname === '/' ||
+    pathname === '/about' ||
     pathname === '/trainers' ||
     (pathname.startsWith('/journal/') && pathname !== '/journal');
 

@@ -13,6 +13,7 @@ import StatementSection from '@/components/sections/StatementSection';
 import CafePreview from '@/components/sections/CafePreview';
 import JournalPreview from '@/components/sections/JournalPreview';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
+import TheCircleSection from '@/components/sections/TheCircleSection';
 import CTABand from '@/components/sections/CTABand';
 
 const TRAINER_FALLBACK = 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=800';
@@ -57,11 +58,12 @@ export default async function Home() {
       <ScrollExpandFilm />
       <StatsBanner />
       <AboutSection />
+      <TheCircleSection />
       <ClassesPreview />
       <TrainersPreview trainers={trainers} />
-      <MembershipPreview />
       <TransformationsPreview transformations={transformations} />
       <StatementSection />
+      <MembershipPreview />
       <CafePreview />
       <JournalPreview articles={articles} />
       <TestimonialsSection />

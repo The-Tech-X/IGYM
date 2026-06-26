@@ -9,10 +9,10 @@ type Stat =
   | { isCount: false; val: string; label: string };
 
 const stats: Stat[] = [
-  { isCount: true,  target: 2400, decimals: 0, suffix: '+', label: 'Members' },
-  { isCount: true,  target: 14,   decimals: 0, suffix: '',  label: 'Expert Coaches' },
-  { isCount: true,  target: 4.9,  decimals: 1, suffix: '★', label: 'Google Rating' },
-  { isCount: false, val: '2019',  label: 'Est.' },
+  { isCount: true,  target: 345,  decimals: 0, suffix: '+', label: 'Members' },
+  { isCount: true,  target: 10,   decimals: 0, suffix: '',  label: 'Expert Coaches' },
+  { isCount: true,  target: 4.6,  decimals: 1, suffix: '★', label: 'Google Rating' },
+  { isCount: false, val: '2023',  label: 'Est.' },
 ];
 
 function StatNumber({

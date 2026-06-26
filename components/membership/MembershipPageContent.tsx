@@ -134,7 +134,7 @@ const faqs = [
   },
   {
     q: 'Do you offer corporate or group arrangements?',
-    a: 'We offer private wellness arrangements for select organisations with ten or more active members. Please direct enquiries to corporate@igym.in.',
+    a: 'We offer private wellness arrangements for select organisations with ten or more active members. Please reach out via WhatsApp or email at igymindia@gmail.com to discuss your requirements.',
   },
   {
     q: 'How do I schedule personal training sessions?',

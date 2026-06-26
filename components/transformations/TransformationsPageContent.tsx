@@ -1,9 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
+import React from 'react';
+import { motion } from 'framer-motion';
 import EyebrowLabel from '../ui/EyebrowLabel';
 
 export type GoalType = 'Weight Loss' | 'Muscle Gain' | 'Athletic Performance' | 'Post-Rehab';
@@ -80,31 +78,12 @@ const packages = [
   },
 ];
 
-export default function TransformationsPageContent({ transformations }: { transformations: TransformationDetail[] }) {
-  const [activeFilter, setActiveFilter] = useState<GoalType | 'All'>('All');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const filteredData = activeFilter === 'All'
-    ? transformations
-    : transformations.filter((item) => item.goalType === activeFilter);
-
-  const customHandle = (
-    <div className="h-full w-[1.5px] bg-gold relative cursor-ew-resize">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full border border-gold bg-charcoal flex items-center justify-center">
-        <div className="w-1.5 h-1.5 bg-gold rounded-full" />
-      </div>
-    </div>
-  );
-
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999';
+export default function TransformationsPageContent({ transformations: _transformations }: { transformations: TransformationDetail[] }) {
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919454694546';
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi%20IGYM,%20I'd%20like%20to%20book%20a%20free%20introductory%20personal%20training%20session.`;
 
   return (
-    <div className="bg-white text-charcoal pt-20">
+    <div className="bg-white text-charcoal pt-10">
       
       {/* Hero Header */}
       <section className="bg-charcoal text-white py-24 md:py-32 text-center relative overflow-hidden border-b border-gold/15">
@@ -153,122 +132,52 @@ export default function TransformationsPageContent({ transformations }: { transf
         </div>
       </section>
 
-      {/* Transformations Gallery */}
+      {/* What Your Transformation Includes */}
       <section className="py-24 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
-        
-        {/* Gallery Headers */}
+
         <div className="text-center mb-16">
-          <EyebrowLabel className="mb-4">THE WORK SPEAKS</EyebrowLabel>
+          <EyebrowLabel className="mb-4">WHAT TO EXPECT</EyebrowLabel>
           <h2 className="text-[32px] md:text-[48px] font-display font-light text-charcoal">
-            Their commitment. <em className="italic text-gold">Our craft.</em>
+            Built around <em className="italic text-gold">you.</em>
           </h2>
         </div>
 
-        {/* Filter row */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-16 max-w-4xl mx-auto">
-          {['All', 'Weight Loss', 'Muscle Gain', 'Athletic Performance', 'Post-Rehab'].map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter as any)}
-              className={`px-5 py-2.5 text-[11px] font-body uppercase tracking-wider transition-all duration-300 rounded-none cursor-pointer border ${
-                activeFilter === filter
-                  ? 'bg-charcoal text-white border-charcoal'
-                  : 'border-beige-dark text-charcoal-mid hover:border-charcoal hover:text-charcoal'
-              }`}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {[
+            {
+              step: '01',
+              title: 'Deep Assessment',
+              body: 'Your programme begins with a thorough biomechanical movement screen, posture analysis, and baseline body composition measurement. We do not skip steps — your starting point informs every training and nutrition decision that follows.',
+            },
+            {
+              step: '02',
+              title: 'Personalised Blueprint',
+              body: 'No templates. Your coach designs a structured weekly training plan, a macro-precise nutrition strategy, and a recovery protocol specific to your goal, lifestyle, and timeline. Every variable is deliberate.',
+            },
+            {
+              step: '03',
+              title: 'Weekly Coaching',
+              body: 'Progress is reviewed each week. Training loads are adjusted, nutrition targets are refined, and any sticking points are addressed before they stall momentum. Your programme evolves as you do.',
+            },
+            {
+              step: '04',
+              title: 'Measurable Outcomes',
+              body: 'We track what matters — body composition, strength benchmarks, and lifestyle markers. At the end of your programme, you leave with a documented record of your progress and a framework to maintain and build on your results.',
+            },
+          ].map((item) => (
+            <motion.div
+              key={item.step}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="border border-beige-dark p-8 flex flex-col space-y-4"
             >
-              {filter}
-            </button>
-          ))}
-        </div>
-
-        {/* Masonry / Grid reflow */}
-        <div className="max-w-6xl mx-auto min-h-[500px]">
-          <AnimatePresence mode="popLayout">
-            <motion.div 
-              layout
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {filteredData.map((item) => (
-                <motion.div
-                  layout
-                  key={item.clientName}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col bg-beige-light/20 border border-beige-dark/50 p-6 space-y-4 h-full justify-between"
-                >
-                  <div>
-                    {/* Compare Slider */}
-                    <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-mid border border-beige-dark mb-4">
-                      {mounted ? (
-                        <ReactCompareSlider
-                          handle={customHandle}
-                          itemOne={
-                            <div className="relative w-full h-full">
-                              <ReactCompareSliderImage 
-                                src={item.beforeImage} 
-                                alt="Before" 
-                                className="object-cover w-full h-full"
-                              />
-                              <span className="absolute bottom-3 left-3 z-10 text-[9px] font-body uppercase tracking-[0.2em] text-white bg-black/40 px-2 py-0.5">
-                                Before
-                              </span>
-                            </div>
-                          }
-                          itemTwo={
-                            <div className="relative w-full h-full">
-                              <ReactCompareSliderImage 
-                                src={item.afterImage} 
-                                alt="After" 
-                                className="object-cover w-full h-full"
-                              />
-                              <span className="absolute bottom-3 right-3 z-10 text-[9px] font-body uppercase tracking-[0.2em] text-gold bg-black/40 px-2 py-0.5">
-                                After
-                              </span>
-                            </div>
-                          }
-                          className="w-full h-full"
-                        />
-                      ) : (
-                        <div className="relative w-full h-full">
-                          <img 
-                            src={item.afterImage} 
-                            alt="After" 
-                            className="object-cover w-full h-full"
-                          />
-                          <span className="absolute bottom-3 right-3 z-10 text-[9px] font-body uppercase tracking-[0.2em] text-gold bg-black/40 px-2 py-0.5">
-                            After
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h3 className="text-[18px] font-display font-light text-charcoal">
-                          {item.clientName} · <span className="text-gray-muted text-[13px] font-body">{item.duration}</span>
-                        </h3>
-                        <Link 
-                          href={`/trainers/${item.trainerSlug}`}
-                          className="text-[12px] font-body text-gray-muted hover:text-gold transition-colors mt-0.5 block"
-                        >
-                          with {item.trainerName} →
-                        </Link>
-                      </div>
-                      <span className="px-2.5 py-1 bg-gold/10 text-gold border border-gold/10 text-[9px] font-body uppercase tracking-wider font-semibold">
-                        {item.goal}
-                      </span>
-                    </div>
-
-                    <blockquote className="text-[14px] font-display italic font-light text-charcoal-mid leading-relaxed mt-4 border-l border-gold/40 pl-4">
-                      &ldquo;{item.testimonial}&rdquo;
-                    </blockquote>
-                  </div>
-                </motion.div>
-              ))}
+              <span className="text-[48px] font-display font-light text-gold/20 leading-none">{item.step}</span>
+              <h3 className="text-[22px] font-display font-light text-charcoal">{item.title}</h3>
+              <p className="text-[14px] font-body font-light text-gray-muted leading-relaxed">{item.body}</p>
             </motion.div>
-          </AnimatePresence>
+          ))}
         </div>
 
       </section>
@@ -360,29 +269,29 @@ export default function TransformationsPageContent({ transformations }: { transf
             className="flex whitespace-nowrap gap-16 text-[12px] font-body uppercase tracking-[0.2em] text-gold font-medium"
           >
             {/* Repeated content to make it seamless */}
-            <span>94% member retention</span>
+            <span>Personalised to every member</span>
             <span className="text-white/20">•</span>
-            <span>Average 14-week programme</span>
+            <span>Assessment-first approach</span>
             <span className="text-white/20">•</span>
-            <span>500+ programmes completed</span>
+            <span>Weekly progress reviews</span>
             <span className="text-white/20">•</span>
-            <span>★ 4.9 on Google</span>
+            <span>★ 4.6 on Google</span>
             <span className="text-white/20">•</span>
-            <span>94% member retention</span>
+            <span>Personalised to every member</span>
             <span className="text-white/20">•</span>
-            <span>Average 14-week programme</span>
+            <span>Assessment-first approach</span>
             <span className="text-white/20">•</span>
-            <span>500+ programmes completed</span>
+            <span>Weekly progress reviews</span>
             <span className="text-white/20">•</span>
-            <span>★ 4.9 on Google</span>
+            <span>★ 4.6 on Google</span>
             <span className="text-white/20">•</span>
-            <span>94% member retention</span>
+            <span>Personalised to every member</span>
             <span className="text-white/20">•</span>
-            <span>Average 14-week programme</span>
+            <span>Assessment-first approach</span>
             <span className="text-white/20">•</span>
-            <span>500+ programmes completed</span>
+            <span>Weekly progress reviews</span>
             <span className="text-white/20">•</span>
-            <span>★ 4.9 on Google</span>
+            <span>★ 4.6 on Google</span>
           </motion.div>
         </div>
       </section>

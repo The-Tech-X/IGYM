@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export default function Footer() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999';
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919454694546';
   const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
   return (
@@ -35,7 +35,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://youtube.com"
+                href="https://www.youtube.com/@igymindia"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-gold transition-colors cursor-pointer"
@@ -94,18 +94,18 @@ export default function Footer() {
             </span>
             <div className="space-y-4">
               <p className="text-[13px] font-body font-light text-gray-muted leading-relaxed">
-                Plot No. 45, luxury District,<br />
-                Jubilee Hills, Hyderabad, TS, 500033
+                Diamond Hills, Gachibowli,<br />
+                Hyderabad - 500032, Telangana, India
               </p>
               <div>
                 <p className="text-[11px] font-body uppercase tracking-[0.1em] text-white">Hours</p>
                 <p className="text-[13px] font-body font-light text-gray-muted mt-1">
-                  Mon–Sat: 5:00 AM – 11:00 PM<br />
-                  Sun: 6:00 AM – 9:00 PM
+                  Mon–Sat: 5:00 AM – 10:00 PM<br />
+                  Sun: 6:00 AM – 12:00 Noon
                 </p>
               </div>
               <a
-                href="https://maps.google.com"
+                href="https://maps.app.goo.gl/bvgh9xYwbD5rBxtt8"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block text-[13px] font-body text-gold hover:text-gold-light hover:underline transition-colors mt-2 cursor-pointer"
@@ -131,10 +131,10 @@ export default function Footer() {
               </a>
               <div className="space-y-1">
                 <p className="text-[13px] font-body font-light text-gray-muted">
-                  Email: <a href="mailto:contact@igym.in" className="hover:text-gold transition-colors">contact@igym.in</a>
+                  Email: <a href="mailto:igymindia@gmail.com" className="hover:text-gold transition-colors">igymindia@gmail.com</a>
                 </p>
                 <p className="text-[13px] font-body font-light text-gray-muted">
-                  Phone: <a href="tel:+919876543210" className="hover:text-gold transition-colors">+91 98765 43210</a>
+                  Phone: <a href="tel:+919454694546" className="hover:text-gold transition-colors">+91 94546 94546</a>
                 </p>
               </div>
             </div>

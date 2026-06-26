@@ -40,7 +40,7 @@ export default function AboutSection() {
             </RevealImage>
             <div className="absolute bottom-0 right-0 bg-charcoal px-3 py-2 z-10">
               <span className="text-[9px] font-body uppercase tracking-[0.22em] text-gold">
-                IGYM · Jubilee Hills
+                IGYM · Gachibowli
               </span>
             </div>
           </motion.div>
@@ -77,7 +77,7 @@ export default function AboutSection() {
             </blockquote>
 
             <p className="text-[12px] font-body font-light text-gray-muted tracking-[0.08em]">
-              Est. 2019 · Jubilee Hills, Hyderabad
+              Est. 2023 · Gachibowli, Hyderabad
             </p>
           </motion.div>
 

@@ -14,7 +14,7 @@ export default function WhatsAppFAB() {
     return () => clearTimeout(timer);
   }, []);
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999';
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919454694546';
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi%20IGYM,%20I'd%20like%20to%20know%20more%20about%20membership%20and%20personal%20training.`;
 
   return (

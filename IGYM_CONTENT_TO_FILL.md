@@ -1,230 +1,206 @@
 # IGYM — Real Content Checklist
 
-Everything below is currently **fake/placeholder** in the codebase.
-Fill in each item with the real IGYM details before going live.
+Legend: ✅ Done · ⏳ Still needed · 🔁 Redesigned (no longer requires this data)
 
 ---
 
 ## 1. Business Basics
 
-| Field | Current Fake Value | Real Value |
+| Field | Status | Value in Code |
 |---|---|---|
-| Gym name displayed | iGym | _______ |
-| Established year | 2019 | _______ |
-| Address line 1 | Plot No. 45, Luxury District | _______ |
-| Address line 2 | Jubilee Hills, Hyderabad, TS, 500033 | _______ |
-| Google Maps link | https://maps.google.com | _______ |
-| Contact email | contact@igym.in | _______ |
-| Corporate/B2B email | corporate@igym.in | _______ |
-| Admin login email (placeholder) | admin@igym.in | _______ |
-| Phone number | +91 98765 43210 | _______ |
-| WhatsApp number (used in 3 places) | 919999999999 | _______ |
-| Instagram handle/URL | https://www.instagram.com/igymindia/ | _______ |
-| YouTube channel URL | https://youtube.com | _______ |
+| Gym name | ✅ | IGYM |
+| Established year | ✅ | 2023 |
+| Address | ✅ | Diamond Hills, Gachibowli, Hyderabad - 500032, Telangana, India |
+| Google Maps link | ✅ | https://maps.app.goo.gl/bvgh9xYwbD5rBxtt8 |
+| Contact email | ✅ | igymindia@gmail.com |
+| Phone number | ✅ | +91 94546 94546 |
+| WhatsApp number | ✅ | 919454694546 (set in all 5 files + env fallback) |
+| Instagram | ✅ | https://www.instagram.com/igymindia/ |
+| YouTube | ✅ | https://www.youtube.com/@igymindia |
+| Corporate/B2B email | ✅ | Removed — FAQ now points to WhatsApp/email |
 
 ---
 
 ## 2. Business Hours
 
-| Day | Current Fake Value | Real Value |
+| Day | Status | Value in Code |
 |---|---|---|
-| Monday – Saturday | 5:00 AM – 11:00 PM | _______ |
-| Sunday | 6:00 AM – 9:00 PM | _______ |
+| Monday – Saturday | ✅ | 5:00 AM – 10:00 PM |
+| Sunday | ✅ | 6:00 AM – 12:00 Noon |
+
+> Note: Sunday deep-cleaning note is not shown in footer (kept minimal). Add it if you want it visible.
 
 ---
 
-## 3. Stats Banner (shown on homepage)
+## 3. Stats Banner
 
-| Stat | Current Fake Value | Real Value |
+| Stat | Status | Value in Code |
 |---|---|---|
-| Total members | 2,400 | _______ |
-| Expert coaches | 14 | _______ |
-| Google rating | 4.9 | _______ |
-| Year established | 2019 | _______ |
+| Total members | ✅ | 345+ |
+| Expert coaches | ✅ | 10 |
+| Google rating | ✅ | 4.6★ |
+| Year established | ✅ | 2023 |
 
 ---
 
-## 4. Trainers (3 fake trainers exist — replace or add real ones)
+## 4. Trainers ⏳
 
-### Trainer 1 (currently "Arjun Mehta")
-- Full name: _______
-- Role/specialization: _______
-- Short bio (2–3 sentences): _______
-- Certifications (list each): _______
-- Availability / weekly schedule: _______
-- Profile photo: _______ *(upload to Sanity or /public)*
+All 3 trainer profiles are still fake (Arjun Mehta, Priya Nair, Rahul Sinha). Add real trainers via **Supabase** (trainers table) or tell me the details and I'll update the mock data.
 
-### Trainer 2 (currently "Priya Nair")
-- Full name: _______
-- Role/specialization: _______
-- Short bio (2–3 sentences): _______
-- Certifications (list each): _______
-- Availability / weekly schedule: _______
-- Profile photo: _______ *(upload to Sanity or /public)*
-
-### Trainer 3 (currently "Rahul Sinha")
-- Full name: _______
-- Role/specialization: _______
-- Short bio (2–3 sentences): _______
-- Certifications (list each): _______
-- Availability / weekly schedule: _______
-- Profile photo: _______ *(upload to Sanity or /public)*
-
-*(Add more trainer blocks as needed)*
+For each real trainer, you need:
+- Full name
+- Role / specialization
+- Short bio (2–3 sentences)
+- Certifications (list each)
+- Availability / weekly schedule
+- Profile photo *(upload to Supabase `trainer-images` bucket)*
 
 ---
 
-## 5. Membership Plans
+## 5. Membership Plans ⏳
 
-### Plan 1 — Essential (currently ₹2,500/mo)
-- Plan name: _______
-- Monthly price: ₹_______
-- Quarterly price: ₹_______
-- Annual price: ₹_______
-- Features included (bullet list): _______
+Prices and plan names are currently placeholder. Confirm or correct:
 
-### Plan 2 — Signature (currently ₹4,000/mo)
-- Plan name: _______
-- Monthly price: ₹_______
-- Quarterly price: ₹_______
-- Annual price: ₹_______
-- Features included (bullet list): _______
+| Plan | Monthly | Quarterly | Annual |
+|---|---|---|---|
+| Essential | ₹2,500 | ₹6,500 | ₹22,000 |
+| Signature | ₹4,000 | ₹10,500 | ₹36,000 |
+| Private | ₹7,500 | ₹19,500 | ₹68,000 |
 
-### Plan 3 — Private (currently ₹7,500/mo)
-- Plan name: _______
-- Monthly price: ₹_______
-- Quarterly price: ₹_______
-- Annual price: ₹_______
-- Features included (bullet list): _______
+Also confirm the **feature lists** for each plan shown on the membership page are accurate.
 
 ---
 
-## 6. Membership FAQ (6 fake Q&As exist)
+## 6. Membership FAQ ⏳
 
-Replace each with real policy answers:
+6 FAQ answers exist in the code but are placeholder policies. Replace with IGYM's real policies:
 
-1. **Q:** How do I cancel my membership?  
-   **A:** _______
-
-2. **Q:** Can I freeze my membership?  
-   **A:** _______
-
-3. **Q:** Is there a joining/registration fee?  
-   **A:** _______
-
-4. **Q:** Can I bring a guest?  
-   **A:** _______
-
-5. **Q:** Do you offer corporate memberships?  
-   **A:** _______
-
-6. **Q:** What happens if I miss a session?  
-   **A:** _______
-
-*(You can change the questions too — these are all fake)*
+1. **Can I pause my membership?** — Current: up to 14/30/60 days by tier. Is this correct?
+2. **Is there an initiation fee?** — Current: ₹2,500 for Essential & Signature; waived for Private. Correct?
+3. **Can I move between tiers?** — Current: upgrade mid-cycle, downgrade at end of billing. Correct?
+4. **What is the guest visit policy?** — Current: 1/mo for Signature, 4/mo for Private. Correct?
+5. **Do you offer corporate arrangements?** — Now points to WhatsApp/email. Tweak wording if needed.
+6. **How do I schedule PT sessions?** — Mentions IGYM app. Correct?
 
 ---
 
-## 7. Testimonials (3 fake ones exist)
+## 7. Testimonials ⏳
 
-### Testimonial 1 (currently "Rohan Kapoor, Member since 2021")
-- Real name (or initials if preferred): _______
-- Member since: _______
-- Quote: _______
-- Photo (optional): _______
+3 fake testimonials still in the code (Rohan Kapoor, Dr. Priyamvada Sen, Siddharth Goel).
 
-### Testimonial 2 (currently "Dr. Priyamvada Sen, Member since 2023")
-- Real name (or initials if preferred): _______
-- Member since: _______
-- Quote: _______
-- Photo (optional): _______
+For each real testimonial provide:
+- Member name (or initials)
+- Member since (year)
+- Quote (1–3 sentences)
 
-### Testimonial 3 (currently "Siddharth Goel, Member since 2022")
-- Real name (or initials if preferred): _______
-- Member since: _______
-- Quote: _______
-- Photo (optional): _______
+File: `components/sections/TestimonialsSection.tsx`
 
 ---
 
-## 8. Transformations / Success Stories (3 fake ones exist)
+## 8. Transformations Page ✅ / ⏳
 
-### Story 1 (currently "Vikram R. — Muscle Gain, 16 weeks")
-- Client name / initials: _______
-- Goal type: _______
-- Duration: _______
-- Before photo: _______ *(upload to Sanity or /public)*
-- After photo: _______ *(upload to Sanity or /public)*
-- Short description: _______
+The before/after client photo gallery has been **removed**. The page now shows IGYM's 4-step process:
+1. Deep Assessment
+2. Personalised Blueprint
+3. Weekly Coaching
+4. Measurable Outcomes
 
-### Story 2 (currently "Sneha P. — Weight Loss, 12 weeks")
-- Client name / initials: _______
-- Goal type: _______
-- Duration: _______
-- Before photo: _______
-- After photo: _______
-- Short description: _______
+The **Coaching Packages** section (Foundation / Signature Programme / Private Coaching) still has placeholder prices:
 
-### Story 3 (currently "Aditya K. — Athletic Performance, 20 weeks")
-- Client name / initials: _______
-- Goal type: _______
-- Duration: _______
-- Before photo: _______
-- After photo: _______
-- Short description: _______
+| Package | Sessions | Price |
+|---|---|---|
+| Foundation | 8 sessions | ₹18,000 |
+| Signature Programme | 24 sessions | ₹48,000 |
+| Private Coaching | Ongoing retainer | ₹75,000 |
+
+Confirm these or provide real pricing.
 
 ---
 
-## 9. Journal / Blog Articles (3 fake articles exist)
+## 9. Journal / Blog Articles ⏳
 
-### Article 1 (currently "The Science of Progressive Overload")
-- Title: _______
-- Author (trainer name): _______
-- Cover image: _______
-- Body content: _______
+3 fake articles exist in mock data (used as fallback when Supabase returns nothing). Add real articles via **Supabase** (journal_posts table) or via the admin panel at `/admin`.
 
-### Article 2 (currently "Nutrition Timing: What the Research Actually Says")
-- Title: _______
-- Author (trainer name): _______
-- Cover image: _______
-- Body content: _______
-
-### Article 3 (currently "Recovery Is Not Optional")
-- Title: _______
-- Author (trainer name): _______
-- Cover image: _______
-- Body content: _______
+For each article:
+- Title
+- Author (must be an existing trainer)
+- Cover image *(upload to Supabase `article-images` bucket)*
+- Body content (written in the admin editor)
 
 ---
 
-## 10. Images to Replace (all currently Unsplash stock photos)
+## 10. Images Still Needed ⏳
 
-| Usage | Replace With |
+All public-facing images are currently Unsplash stock photos (loaded as fallback when Supabase image URLs are null). Upload real photos to Supabase buckets to replace them.
+
+| What | Supabase Bucket | Notes |
+|---|---|---|
+| Trainer profile photos | `trainer-images` | One per trainer |
+| Article cover images | `article-images` | One per article |
+| Cafe hero image | `cafe-images` | Main cafe/menu page image |
+| About section image | *(in `/public/Images/`)* | Currently `IGYM 01.jpg` — already a real photo, just not in git |
+| Hero carousel images | *(in `/public/Images/`)* | `hero3.png`, `hero1.png`, `hero2.png` are live |
+| Intro film | `public/Videos/` | Already recorded; host on Supabase Storage or Cloudflare R2 and set URL |
+
+---
+
+## 11. Cafe Menu ⏳
+
+The cafe page exists and loads items from Supabase (`cafe_menu` table). Add real items via the admin panel at `/admin`.
+
+For each menu item:
+- Name
+- Category (Pre-Workout / Post-Workout / Meals / Juices / Shakes)
+- Description
+- Price (₹)
+- Photo *(upload to Supabase `cafe-images` bucket)*
+- Macros: protein (g), carbs (g), fat (g), calories
+
+---
+
+## 12. Privacy Policy & Terms pages ⏳
+
+Footer links to `/privacy` and `/terms` — these pages don't exist yet. Either:
+- Create them with real legal content
+- Or remove the links from the footer until ready
+
+---
+
+## 13. The Circle — Notable Members ⏳
+
+Section is live on the homepage (between Testimonials and CTA). Currently showing 6 placeholder cards with Unsplash photos.
+
+For each real person, provide:
+- Full name (or how they want to be credited)
+- Title / handle (e.g. "Film Actor · Telugu", "Founder & CEO", "National Athlete", "@handle · 2M+ Followers")
+- Portrait photo — ideally vertical/portrait orientation (9:16 ratio works best)
+- Short video (optional, 15–60 sec) — if they recorded a testimonial reel/story
+
+How to update: edit the `CIRCLE` array in `components/sections/TheCircleSection.tsx`.  
+Set `isFeatured: true` on one person to give them a gold border and top bar highlight.
+
+---
+
+## Summary — What's Left Before Launch
+
+| Area | Status |
 |---|---|
-| Trainer 1 profile photo | Real photo of trainer 1 |
-| Trainer 2 profile photo | Real photo of trainer 2 |
-| Trainer 3 profile photo | Real photo of trainer 3 |
-| Article 1 cover image | Real article cover |
-| Article 2 cover image | Real article cover |
-| Article 3 cover image | Real article cover |
-| Transformation before/after (×3 sets) | Real client photos (with consent) |
-| Cafe hero image | Real photo of IGYM cafe |
-| Journal/blog fallback avatar | Real trainer headshot |
-| Hero carousel / intro film | Real IGYM video at `public/intro-film.mp4` |
-
----
-
-## 11. Cafe Menu (if applicable)
-
-The cafe page exists — if IGYM has a real cafe/juice bar, provide:
-- Menu items with names and prices
-- Real food/drink photos
-- Any allergen or nutrition notes
-
----
-
-## Notes
-
-- All trainer data, articles, and transformations can be managed via **Sanity CMS** once you add the real content there.
-- Contact details (address, phone, WhatsApp, social links) are hardcoded in `components/layout/Footer.tsx` — update those directly or tell me and I'll update them.
-- Stats in `components/sections/StatsBanner.tsx` are hardcoded — tell me the real numbers and I'll update them.
+| Business info (address, contact, hours, social) | ✅ Done |
+| Stats banner | ✅ Done |
+| Transformations page | ✅ Redesigned — no fake data |
+| The Circle section | ✅ Built — add real people to `TheCircleSection.tsx` |
+| About page | ✅ Built — replace founder photo when ready |
+| Cafe logo (TheProTeinCO.png) | ✅ Showing — needs to be hosted (not in git) |
+| Homepage section order | ✅ Resequenced for conversion flow |
+| Build | ✅ Passing — 28 pages, zero errors (2026-06-26) |
+| Trainers | ⏳ Add real trainers via Supabase/admin |
+| The Circle — real people | ⏳ Replace 6 placeholders in `TheCircleSection.tsx` |
+| Founder photo | ⏳ Replace `FOUNDER_PLACEHOLDER` in `AboutPageContent.tsx` |
+| Membership prices & FAQ | ⏳ Confirm/correct current values |
+| Testimonials | ⏳ Replace 3 fake ones |
+| Journal articles | ⏳ Add real articles via admin panel |
+| Images (trainers, articles, cafe) | ⏳ Upload to Supabase buckets |
+| Cafe menu | ⏳ Add real items via admin panel |
+| PT coaching package prices | ⏳ Confirm on transformations page |
+| TheProTeinCO.png hosting | ⏳ Remove from .gitignore OR host on Supabase Storage |
+| Privacy & Terms pages | ⏳ Create or remove footer links |

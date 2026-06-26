@@ -27,11 +27,11 @@ export default function CafePageContent({ items }: { items: MenuItem[] }) {
 
   const filteredItems = items.filter((item) => item.category === activeTab);
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999';
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919454694546';
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi%20IGYM,%20I'd%20like%20to%20book%20a%20free%20consultation%20with%20your%20nutritionist.`;
 
   return (
-    <div className="bg-white text-charcoal pt-20">
+    <div className="bg-white text-charcoal pt-10">
       
       {/* Hero: Split screen */}
       <section className="grid grid-cols-1 lg:grid-cols-12 min-h-[60vh] border-b border-beige-dark/30">
@@ -47,14 +47,28 @@ export default function CafePageContent({ items }: { items: MenuItem[] }) {
           />
         </div>
         {/* Right Half: Text content */}
-        <div className="lg:col-span-6 bg-beige-light flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-24 space-y-6">
-          <EyebrowLabel>IGYM CAFÉ</EyebrowLabel>
-          <h1 className="text-[40px] md:text-[56px] font-display font-light text-charcoal leading-tight">
-            Where performance<br />meets pleasure.
-          </h1>
-          <p className="text-[16px] font-body font-light text-charcoal-mid leading-relaxed max-w-lg">
-            Recovery begins at the cellular level. Designed by sports nutritionists and built for high-performance athletes, our menu ensures every ingredient serves a physiological purpose.
-          </p>
+        <div className="lg:col-span-6 bg-beige-light flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-24">
+
+          {/* The ProTein CO. logo */}
+          <div className="mb-7">
+            <img
+              src="/Images/TheProTeinCO.png"
+              alt="The ProTein CO."
+              className="h-45 w-auto object-contain object-left"
+              draggable={false}
+            />
+          </div>
+
+          <div className="space-y-6">
+            <EyebrowLabel>IGYM CAFÉ · THE PROTEIN CO.</EyebrowLabel>
+            <h1 className="text-[40px] md:text-[56px] font-display font-light text-charcoal leading-tight">
+              Where performance<br />meets pleasure.
+            </h1>
+            <p className="text-[16px] font-body font-light text-charcoal-mid leading-relaxed max-w-lg">
+              Recovery begins at the cellular level. Designed by sports nutritionists and built for high-performance athletes, our menu ensures every ingredient serves a physiological purpose.
+            </p>
+          </div>
+
         </div>
       </section>
 

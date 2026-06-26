@@ -174,7 +174,7 @@ public/
 - **Entrance animations:** `useInView({ once: true, margin: '-10%' })`, stagger `delay: index * 0.08`, ease `[0.22, 1, 0.36, 1]`, duration `0.7s`.
 - **Hover transitions:** CSS `duration-[600ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]`.
 - **Data state:** All public pages fetch live from Supabase via `createPublicClient` (cookieless). Admin panel reads/writes via the cookie-session/service-role clients. Sanity and static mock data are fully removed. Public pages fall back to Unsplash placeholder images when a row's image_url is null.
-- **WhatsApp:** All CTAs use `wa.me/${NEXT_PUBLIC_WHATSAPP_NUMBER}`. Fallback: `'919999999999'`.
+- **WhatsApp:** All CTAs use `wa.me/${NEXT_PUBLIC_WHATSAPP_NUMBER}`. Fallback: `'919454694546'`.
 - **Custom cursor:** Desktop only (`hidden md:block`), `mix-blend-difference`.
 
 ### Admin / Supabase patterns (all phases complete)
@@ -196,12 +196,32 @@ public/
 
 ## Content Still Needing Real Data (Before Launch)
 
-- Trainer names are fictional (Sarah Jenkins, Marcus Chen, Elena Rostova, David Vance)
-- All images are Unsplash placeholders — real IGYM photography needed
-- Footer address: "Plot No. 45, luxury District, Jubilee Hills" — needs real address
-- Footer Instagram links to `https://www.instagram.com/igymindia/` ✓
-- Contact: `contact@igym.in`, `+91 98765 43210` — verify
-- WhatsApp fallback: `919999999999` — set real number in `.env.local`
-- Google Maps: `https://maps.google.com` — needs actual IGYM location link
-- Privacy/Terms pages (`/privacy`, `/terms`) linked in footer but not created
-- Membership plan details in `MembershipPageContent.tsx` still show old plan names (inner pages not yet updated)
+**Already filled (do not overwrite):**
+- Address: Diamond Hills, Gachibowli, Hyderabad - 500032, Telangana, India
+- Email: `igymindia@gmail.com` · Phone: `+91 94546 94546`
+- WhatsApp fallback: `919454694546` (set in all 5 component files; also set `NEXT_PUBLIC_WHATSAPP_NUMBER` in `.env.local`)
+- Google Maps: `https://maps.app.goo.gl/bvgh9xYwbD5rBxtt8`
+- Hours: Mon–Sat 5:00 AM–10:00 PM · Sun 6:00 AM–12:00 Noon
+- Stats: 345+ members, 10 coaches, 4.6★ Google, Est. 2023
+- Instagram: `https://www.instagram.com/igymindia/` · YouTube: `https://www.youtube.com/@igymindia`
+- Transformations page: before/after gallery removed; now shows 4-step process (no client photos needed)
+- About page: `/about` — full page built (founder story, TechnoGym, The ProTein Co., 4 pillars, CTA)
+- The Circle section: built on homepage — horizontal scroll rail, drag-to-scroll, lightbox modal
+- Homepage section order resequenced for optimal conversion flow
+- Cafe page: TheProTeinCO.png logo shown in hero; cafe name updated to "The ProTein CO."
+- Navbar: "About" added before Trainers; `/about` registered as dark hero page
+- TransformationsPreview (homepage): replaced before/after sliders with cinematic text reveal
+- Build: ✅ passing as of 2026-06-26, 28 pages, zero TypeScript errors
+
+**Still needed before launch:**
+- Trainer profiles — currently 3 fake names (Arjun Mehta, Priya Nair, Rahul Sinha); add real trainers via Supabase
+- The Circle section — 6 placeholder cards; replace with real people in `TheCircleSection.tsx`
+- About page founder photo — placeholder Unsplash image; replace `FOUNDER_PLACEHOLDER` in `AboutPageContent.tsx`
+- All images are Unsplash placeholders — upload real IGYM photos to Supabase storage buckets
+- Membership plan prices & FAQ answers — placeholder values; confirm or correct in `MembershipPageContent.tsx`
+- PT coaching package prices on transformations page — confirm in `TransformationsPageContent.tsx`
+- Testimonials — 3 fake entries in `TestimonialsSection.tsx`; replace with real member quotes
+- Journal articles — add real posts via `/admin` panel
+- Cafe menu items — add real items via `/admin` panel
+- TheProTeinCO.png — in gitignored `public/Images/`; either remove from `.gitignore` or host on Supabase Storage
+- `/privacy` and `/terms` pages linked in footer but not yet created

@@ -47,8 +47,8 @@ export default function HeroCarousel() {
 
   const bgVariants = {
     initial: { opacity: 0 },
-    animate: { opacity: 1, transition: { duration: 1.0, ease: 'easeOut' } },
-    exit:    { opacity: 0, transition: { duration: 0.9, ease: 'easeInOut' } },
+    animate: { opacity: 1, transition: { duration: 1.0, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+    exit:    { opacity: 0, transition: { duration: 0.9, ease: [0.42, 0, 0.58, 1] as [number, number, number, number] } },
   };
 
   const wordContainerVariants = {

@@ -94,7 +94,7 @@ export default async function TrainerPage({ params }: Props) {
   const specialties = (trainer.specialties ?? []) as string[];
   const availability = (trainer.availability ?? []) as Array<{ day: string; hours: string }>;
 
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999';
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919454694546';
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi%20IGYM,%20I'd%20like%20to%20arrange%20a%20coaching%20consultation%20with%20${encodeURIComponent(
     trainer.name
   )}.`;
