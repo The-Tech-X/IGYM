@@ -97,12 +97,20 @@ app/
       trainers.ts         — trainer CRUD (get/create/update/delete)
       transformations.ts  — transformation CRUD (no redirect; caller refreshes)
       cafe.ts             — café menu CRUD
+      gym-info.ts         — getGymInfo(): Promise<string>; updateGymInfo(formData): Promise<void>
+                            (returns void not {error} — required by Next.js 16 <form action> type constraint)
+      leads.ts            — getLeads(): Promise<Lead[]> ordered by created_at desc
     trainers/             — list, new, [id]/edit (TrainerForm + inline TransformationSection)
     cafe/                 — list (grouped by category), new, [id]/edit (CafeItemForm)
+    knowledge/page.tsx    — plain-text textarea to edit gym_info.content; accessible to all roles
+    leads/page.tsx        — read-only table of AI-captured leads (name, phone, enquiry, date)
+
+  api/
+    chat/route.ts         — POST; streaming SSE AI concierge; see AI Concierge section below
 
 components/
   admin/                  — ADMIN UI (all client components, light theme, gold #C9A84C)
-    Sidebar.tsx           — persistent nav; Settings link admin-only; user + role badge
+    Sidebar.tsx           — persistent nav; navItems: Dashboard, Journal, Trainers, Café, Knowledge, Leads (all roles); Settings admin-only; user + role badge
     ImageUpload.tsx       — drag/drop → Supabase Storage, type+size validation, 128px preview
     TagInput.tsx          — chip input (specialties, certifications)
     AvailabilityEditor.tsx — repeating day/hours rows
@@ -111,13 +119,14 @@ components/
     TransformationSection.tsx — inline transformation add/edit/delete on trainer edit page
     CafeItemForm.tsx      — café form; macros auto-calc calories (editable override)
   layout/
-    SiteLayout.tsx        — Lenis root, PageLoader, CustomCursor, Navbar, Footer, WhatsAppFAB
-                            (bypassed for /admin paths)
+    SiteLayout.tsx        — Lenis root, PageLoader, CustomCursor, Navbar, Footer, ChatWidget
+                            (bypassed for /admin paths; WhatsAppFAB.tsx kept on disk but no longer used)
     Navbar.tsx            — 5 links (Trainers, Membership, Café, Transformations, Journal) + "Enquire" CTA
     Footer.tsx            — 4-col dark: Brand | Explore | Visit Us | Get in Touch
     CustomCursor.tsx      — Spring-physics cursor ring + dot (desktop only, mix-blend-difference)
     PageLoader.tsx        — IGYM text + gold sweep line → fades out after 1.8s
-    WhatsAppFAB.tsx       — Fixed bottom-right WhatsApp button, appears after 3s
+    WhatsAppFAB.tsx       — Original WhatsApp button (kept, no longer mounted)
+    ChatWidget.tsx        — AI concierge floating widget; replaces WhatsAppFAB; see AI Concierge section
   sections/               — Homepage sections (11 total)
     HeroCarousel.tsx      — 3 slides, large display type, bottom-left anchor, scroll indicator
     StatsBanner.tsx       — Dark band: 2400+ Members, 14 Coaches, 4.9★ Rating, Est. 2019
@@ -146,7 +155,13 @@ lib/
     client.ts             — browser client (createBrowserClient) — Client Components
     server.ts             — server client (createServerClient + cookies) — Server Components/Actions
     admin.ts              — service-role client (bypasses RLS) — server-only, user mgmt + layout lookup
-    types.ts              — TS interfaces: AdminUser, Trainer, Transformation, JournalPost, CafeMenuItem
+    types.ts              — TS interfaces: AdminUser, Trainer, Transformation, JournalPost, CafeMenuItem,
+                            GymInfo (id:boolean PK — single-row trick), Lead
+  chat/
+    context.ts            — buildContext(): queries gym_info + trainers + cafe_menu_items via admin client,
+                            assembles plain-text context string for the AI
+    system-prompt.ts      — buildSystemPrompt(context): IGYM concierge persona, brand voice rules,
+                            lead capture marker instructions
   utils/
     slugify.ts, readTime.ts, calories.ts  — pure helpers (Vitest-tested in __tests__/)
     tiptapToHtml.ts       — server-safe TipTap JSON → HTML renderer (XSS-escaped); used by public article page
@@ -160,6 +175,9 @@ supabase/
   schema.sql              — full DB schema: 5 tables, RLS policies, triggers, indexes, GRANTs
   grants.sql              — table GRANTs for API roles (needed because "auto-expose new tables" is OFF)
   storage-policies.sql    — storage.objects INSERT/UPDATE/DELETE policies for admin uploads
+  migrations/
+    add_chat_tables.sql   — ⚠️ NOT YET RUN — adds gym_info + leads tables; must be pasted into
+                            Supabase SQL editor before the chat feature works
 
 public/
   hero-1.png, hero-2.png, hero-3.png  — Hero carousel images
@@ -189,7 +207,7 @@ public/
 - **Storage uploads:** Public buckets grant public READ only. Admin uploads require `storage.objects` policies — run `supabase/storage-policies.sql`. 5 buckets: `trainer-images`, `transformation-images`, `article-images`, `cafe-images`, `avatars`. Uploads: type (jpeg/png/webp) + 5MB cap.
 - **Server actions:** in `app/admin/actions/`. Create/update redirect on success (`redirect()` must stay OUTSIDE try/catch). Delete actions return `{ error }` and the client refreshes. Always `await createClient()` (server client is async).
 - **Admin theme:** dark sidebar (`zinc-950`), light content (`zinc-50`), gold accent `#C9A84C`, Cormorant for headings. Distinct from the public site's gold `#C4A35A`.
-- **Env vars needed:** `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (server-only), `NEXT_PUBLIC_WHATSAPP_NUMBER`. The Sanity env vars are obsolete.
+- **Env vars needed:** `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (server-only), `NEXT_PUBLIC_WHATSAPP_NUMBER`, `NVIDIA_API_KEY` (server-only — for AI concierge). The Sanity env vars are obsolete.
 - **Specs/plans:** design at `docs/superpowers/specs/2026-06-12-supabase-backend-design.md`; task-by-task plan at `docs/superpowers/plans/2026-06-12-supabase-backend.md`.
 
 ---
@@ -211,7 +229,7 @@ public/
 - Cafe page: TheProTeinCO.png logo shown in hero; cafe name updated to "The ProTein CO."
 - Navbar: "About" added before Trainers; `/about` registered as dark hero page
 - TransformationsPreview (homepage): replaced before/after sliders with cinematic text reveal
-- Build: ✅ passing as of 2026-06-26, 28 pages, zero TypeScript errors
+- Build: ✅ passing as of 2026-06-27, 31 pages, zero TypeScript errors (includes chat API + admin pages)
 
 **Still needed before launch:**
 - Trainer profiles — currently 3 fake names (Arjun Mehta, Priya Nair, Rahul Sinha); add real trainers via Supabase
@@ -225,3 +243,97 @@ public/
 - Cafe menu items — add real items via `/admin` panel
 - TheProTeinCO.png — in gitignored `public/Images/`; either remove from `.gitignore` or host on Supabase Storage
 - `/privacy` and `/terms` pages linked in footer but not yet created
+
+---
+
+## AI Concierge (Chat Widget)
+
+Built 2026-06-27. A floating chat widget powered by Mistral via NVIDIA NIM, replacing the WhatsApp FAB.
+
+### How it works end to end
+
+1. User opens `ChatWidget` (bottom-right FAB) → types a message
+2. Widget POSTs `{ messages: Message[] }` to `/api/chat`
+3. Route handler queries Supabase (gym_info + trainers + cafe_menu_items) via `createAdminClient()`
+4. Builds context string + system prompt (IGYM concierge persona + lead capture instructions)
+5. Calls `mistralai/mistral-medium-3.5-128b` on NVIDIA NIM with `stream: true`
+6. Streams tokens back as SSE: `data: {"text":"..."}\n\n` ... `data: [DONE]\n\n`
+7. Widget reads SSE, updates last assistant message in place (real-time streaming effect)
+8. If AI includes `<<LEAD:name=...,phone=...,enquiry=...>>` marker → route strips it, saves to `leads` table
+
+### Key files
+
+| File | Role |
+|---|---|
+| `app/api/chat/route.ts` | POST handler — validation, context fetch, NVIDIA NIM call, SSE stream, lead marker stripping |
+| `lib/chat/context.ts` | `buildContext()` — queries 3 Supabase tables, assembles text block |
+| `lib/chat/system-prompt.ts` | `buildSystemPrompt(context)` — persona, tone rules, lead capture instructions |
+| `components/layout/ChatWidget.tsx` | Client component — FAB + panel, SSE reader, auto-grow textarea, click-outside close |
+| `app/admin/knowledge/page.tsx` | Admin editor — textarea for gym_info.content, saved via server action |
+| `app/admin/leads/page.tsx` | Read-only leads table — all captured name/phone/enquiry rows |
+
+### Supabase tables (run `supabase/migrations/add_chat_tables.sql` first)
+
+**`gym_info`** — single-row (`id boolean PRIMARY KEY DEFAULT true` + CHECK constraint). Holds the full plain-text knowledge base the AI reads on every request. Admin edits via `/admin/knowledge`. RLS: public SELECT, authenticated UPDATE (admin_users only).
+
+**`leads`** — one row per captured lead. Columns: id (uuid), name, phone, enquiry (nullable), created_at. RLS: service_role INSERT only (chat API uses admin client), authenticated SELECT (admin_users). Admin views via `/admin/leads`.
+
+### Lead capture mechanism
+
+The system prompt instructs the AI to append `<<LEAD:name={},phone={},enquiry={}>>` exactly once at the end of its response when it has gathered both name AND phone from the user. The route handler:
+- Buffers the stream tail to detect markers that span chunk boundaries
+- Uses `lastIndexOf('>>')` to find the true end (handles `>>` inside enquiry text)
+- Strips the marker entirely before it reaches the client SSE stream
+- Calls `saveLead()` fire-and-forget (no blocking the stream)
+- `parseLeadMarker` finds `,enquiry=` by position then takes everything after it — preserves commas in the enquiry value
+
+### NVIDIA NIM / OpenAI SDK patterns
+
+```typescript
+import OpenAI from 'openai'
+const client = new OpenAI({
+  baseURL: 'https://integrate.api.nvidia.com/v1',
+  apiKey: process.env.NVIDIA_API_KEY,   // server-only, never NEXT_PUBLIC_
+})
+```
+
+The `openai` package is used because NVIDIA NIM is OpenAI-compatible. To switch models: change the `model` string. To switch to actual OpenAI: remove `baseURL`. To switch to Claude: use `@anthropic-ai/sdk` instead (different package, different API shape).
+
+### Security hardening applied
+
+- Runtime message validation: filters to `role: 'user'|'assistant'` only (blocks system-role injection), content must be string ≤ 2000 chars
+- Message count cap: `.slice(-20)` — prevents token-bomb and cost amplification
+- `NVIDIA_API_KEY` is server-only (no `NEXT_PUBLIC_` prefix, never in client bundle)
+- `saveLead` errors are caught and logged only — never surface to client
+
+### ChatWidget UX details
+
+- 3-second delay before FAB appears (same as original WhatsApp FAB)
+- Click outside panel (or anywhere on page) closes it — `mousedown` listener excludes both `panelRef` and `fabRef` to avoid toggle flicker
+- Textarea auto-grows: `onChange` sets `height = 'auto'` then `Math.min(scrollHeight, 96)px`; resets to `'auto'` on send
+- Scrollbars hidden: `[&::-webkit-scrollbar]:hidden` + `scrollbarWidth: 'none'` on both messages area and textarea
+- SSE loop uses labeled `break outer` to correctly exit the while loop on `[DONE]`
+
+### ⚠️ Before the chat feature works in any environment
+
+1. Run `supabase/migrations/add_chat_tables.sql` in the Supabase SQL editor
+2. Set `NVIDIA_API_KEY` in `.env.local` (and Vercel env vars for production) — the placeholder is there, add the real rotated key
+3. Go to `/admin/knowledge` and fill in real IGYM content (pricing, hours, location, founder, mission, policies)
+
+---
+
+## WhatsApp Integration (Not Yet Built)
+
+**Plan:** Add `app/api/whatsapp/route.ts` — a POST webhook that Twilio/WATI/Interakt calls when a WhatsApp message arrives. It will reuse `lib/chat/context.ts` and `lib/chat/system-prompt.ts` directly. Key difference from the website chat: **no streaming** (Twilio expects a complete response) and **conversation history must be persisted** in Supabase (keyed by sender phone number) since each WhatsApp message is a stateless webhook.
+
+**Recommended path for production:**
+- Test now: Twilio Sandbox (no Meta approval, join-code required)
+- Production Indian number: WATI (wati.io) or Interakt (interakt.shop) — both are India-focused BSPs that handle Meta business verification, typically 3–5 days
+- Twilio is also viable but will give a US number unless you source an Indian virtual number separately
+
+**What will need to be added when building:**
+- `whatsapp_sessions` table in Supabase — stores conversation history per sender phone
+- Twilio signature validation (`X-Twilio-Signature` header)
+- `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_WHATSAPP_NUMBER` env vars
+- Non-streaming Mistral call (same model, `stream: false`)
+- Lead capture: sender phone is already in the Twilio payload — only name needs to be gathered

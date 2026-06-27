@@ -8,6 +8,8 @@ import {
   BookOpen,
   Users,
   UtensilsCrossed,
+  BookMarked,
+  MessageSquare,
   Settings,
   LogOut,
 } from 'lucide-react'
@@ -23,6 +25,8 @@ const navItems = [
   { href: '/admin/journal', label: 'Journal', icon: BookOpen },
   { href: '/admin/trainers', label: 'Trainers', icon: Users },
   { href: '/admin/cafe', label: 'Café', icon: UtensilsCrossed },
+  { href: '/admin/knowledge', label: 'Knowledge', icon: BookMarked },
+  { href: '/admin/leads', label: 'Leads', icon: MessageSquare },
 ]
 
 export default function Sidebar({ role, displayName }: SidebarProps) {

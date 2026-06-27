@@ -76,3 +76,18 @@ export interface CafeMenuItem {
   created_at: string
   updated_at: string
 }
+
+export interface GymInfo {
+  // boolean PK enforces exactly one row — see supabase/migrations/add_chat_tables.sql
+  id: boolean
+  content: string
+  updated_at: string
+}
+
+export interface Lead {
+  id: string
+  name: string
+  phone: string
+  enquiry: string | null
+  created_at: string
+}

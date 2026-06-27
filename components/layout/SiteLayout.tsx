@@ -6,7 +6,7 @@ import { ReactLenis } from '@studio-freight/react-lenis';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import CustomCursor from './CustomCursor';
-import WhatsAppFAB from './WhatsAppFAB';
+import ChatWidget from './ChatWidget';
 import PageLoader from './PageLoader';
 import FilmGrain from '../ui/FilmGrain';
 import { NavbarContext } from './NavbarContext';
@@ -36,7 +36,7 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
           <main className="flex-grow">{children}</main>
         </div>
         <Footer />
-        <WhatsAppFAB />
+        <ChatWidget />
       </ReactLenis>
     </NavbarContext.Provider>
   );
